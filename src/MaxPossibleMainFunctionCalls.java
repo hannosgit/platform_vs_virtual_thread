@@ -23,23 +23,22 @@ public class MaxPossibleMainFunctionCalls {
         for (int i = 0; i < 100_000_000; i++) {
             System.out.println(i);
             CountDownLatch latch = new CountDownLatch(1);
-            threadBuilder.start(() -> method(latch,100));
+            threadBuilder.start(() -> method(latch, 100));
             latch.await();
         }
     }
 
     private static void method(CountDownLatch latch, int methodCalls) {
         try {
-            final int stackTraceDepth = methodCalls - 4;
-            recursive(latch, stackTraceDepth);
+            recursive(latch, methodCalls);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void recursive(CountDownLatch latch, int i) throws InterruptedException {
-        if (i > 0) {
-            recursive(latch, i - 1);
+    private static void recursive(CountDownLatch latch, int methodCalls) throws InterruptedException {
+        if (methodCalls > 0) {
+            recursive(latch, methodCalls - 1);
         } else {
             latch.countDown();
             HOLD.await();
