@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="platform_vs_virtual_threads:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/platform_vs_virtual_threads_jar</output-path>
+    <root id="archive" name="platform_vs_virtual_threads.jar">
+      <element id="module-output" name="platform_vs_virtual_threads" />
+    </root>
+  </artifact>
+</component>
