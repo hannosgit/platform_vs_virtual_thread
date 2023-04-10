@@ -8,7 +8,7 @@ public class MaxPossibleMainFunctionCalls {
     public static void main(String[] args) throws InterruptedException {
         final Thread.Builder threadBuilder;
 
-        if (args.length > 0) {
+        if (args.length > 1) {
             System.out.println("Using platform threads!");
             threadBuilder = Thread.ofPlatform();
         } else {
@@ -20,10 +20,13 @@ public class MaxPossibleMainFunctionCalls {
         System.out.println("Total memory: " + Util.toHumanReadableByNumOfLeadingZeros(Runtime.getRuntime().totalMemory()));
         Thread.sleep(Duration.ofSeconds(5));
 
+        final int methodCalls = Integer.parseInt(args[0]);
+        System.out.printf("Making %d method calls%n", methodCalls);
+
         for (int i = 0; i < 100_000_000; i++) {
             System.out.println(i);
             CountDownLatch latch = new CountDownLatch(1);
-            threadBuilder.start(() -> method(latch, 100));
+            threadBuilder.start(() -> method(latch, methodCalls));
             latch.await();
         }
     }
