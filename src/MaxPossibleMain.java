@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 
@@ -16,8 +17,8 @@ public class MaxPossibleMain {
             threadBuilder = Thread.ofVirtual();
         }
         System.out.println("PID: " + ProcessHandle.current().pid());
-        System.out.println("Max memory: " + Util.toHumanReadableByNumOfLeadingZeros(Runtime.getRuntime().maxMemory()));
-        System.out.println("Total memory: " + Util.toHumanReadableByNumOfLeadingZeros(Runtime.getRuntime().totalMemory()));
+        System.out.println("Max memory: " + toHumanReadableByNumOfLeadingZeros(Runtime.getRuntime().maxMemory()));
+        System.out.println("Total memory: " + toHumanReadableByNumOfLeadingZeros(Runtime.getRuntime().totalMemory()));
         Thread.sleep(Duration.ofSeconds(5));
 
         final int methodCalls = Integer.parseInt(args[0]);
@@ -47,4 +48,20 @@ public class MaxPossibleMain {
             HOLD.await();
         }
     }
+
+    private static final DecimalFormat DEC_FORMAT = new DecimalFormat("#.##");
+
+    public static String toHumanReadableByNumOfLeadingZeros(long size) {
+        if (size < 0) {
+            throw new IllegalArgumentException("Invalid file size: " + size);
+        }
+        if (size < 1024) return size + " Bytes";
+        int unitIdx = (63 - Long.numberOfLeadingZeros(size)) / 10;
+        return formatSize(size, 1L << (unitIdx * 10), " KMGTPE".charAt(unitIdx) + "iB");
+    }
+
+    private static String formatSize(long size, long divider, String unitName) {
+        return DEC_FORMAT.format((double) size / divider) + " " + unitName;
+    }
+
 }
