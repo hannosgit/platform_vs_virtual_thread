@@ -1,7 +1,7 @@
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 
-public class Memory {
+public class MemoryUsage {
 
     private static final CountDownLatch HOLD = new CountDownLatch(1);
 

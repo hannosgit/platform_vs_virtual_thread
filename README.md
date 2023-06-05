@@ -11,7 +11,7 @@ Otherwise, virtual threads are created.
 
 The following example creates 100 virtual threads per run:
 ```
-java --source 20 --enable-preview src/ThreadCreationTime.java 100
+java --source 20 --enable-preview src/CreationTime.java 100
 ```
 
 ## Maximum Quantity of Threads
@@ -23,7 +23,7 @@ Otherwise, virtual threads are created.
 
 The following example creates 1.000 platform threads with 100 method calls per thread:
 ```
-java --source 20 --enable-preview src/MaxPossibleMain.java 100 plt
+java --source 20 --enable-preview src/QuantityOfThreads.java 100 plt
 ```
 
 ## Memory Usage
@@ -35,5 +35,5 @@ Otherwise, virtual threads are created.
 
 The following example creates 1.000 virtual threads with 10 method calls per thread:
 ```
-java --source 20 --enable-preview src/Memory.java 1000 10
+java --source 20 --enable-preview src/MemoryUsage.java 1000 10
 ```

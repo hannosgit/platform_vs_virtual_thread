@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 
-public class MaxPossibleMain {
+public class QuantityOfThreads {
 
     private static final CountDownLatch HOLD = new CountDownLatch(1);
 

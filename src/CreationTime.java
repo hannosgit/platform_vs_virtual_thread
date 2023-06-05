@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.LongStream;
 
-public class ThreadCreationTime {
+public class CreationTime {
 
     private static final int MEASUREMENTS = 10;
     private static final List<Long> nanos = new ArrayList<>();
@@ -44,7 +44,7 @@ public class ThreadCreationTime {
         long startTime = System.nanoTime();
         final List<Thread> threadList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            threadList.add(threadBuilder.start(ThreadCreationTime::method));
+            threadList.add(threadBuilder.start(CreationTime::method));
         }
         long elapsedNanos = System.nanoTime() - startTime;
         nanos.add(elapsedNanos);
@@ -66,7 +66,7 @@ public class ThreadCreationTime {
     private static void createThreads(Thread.Builder threadBuilder, int count) {
         final List<Thread> threadList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            threadList.add(threadBuilder.start(ThreadCreationTime::method));
+            threadList.add(threadBuilder.start(CreationTime::method));
         }
 
         // Cleanup
